@@ -2,8 +2,8 @@ var pipeline= require("./pipeline")
 
 module.exports = makeSecondClassFunction
 
-function _results(ctx){
-	return ctx.results || ctx.last
+function _result(ctx){
+	return ctx.result || ctx.last
 }
 
 function _fail(ctx){
@@ -23,7 +23,7 @@ function makeSecondClassFunction() {
 	*/
 	function SecondClassFunction(){
 		var args= Array.prtotype.slice.call(arguments, 0)
-		return pipeline(this, chain, args).then(_results, _fail)
+		return pipeline(this, chain, args).then(_result, _fail)
 	}
 	/**
 	* The underlying command chain
@@ -32,7 +32,7 @@ function makeSecondClassFunction() {
 	SecondClassFunction.chain= chain
 
 	/**
-	* apply, returning the continuation, rather than the continuation's results.
+	* apply, returning the continuation, rather than the continuation's result.
 	* @memberOf SecondClassFunction
 	*/
 	function applyRaw(self, args){
