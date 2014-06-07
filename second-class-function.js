@@ -36,9 +36,9 @@ function makeSecondClassFunction() {
 	* @memberOf SecondClassFunction
 	*/
 	function applyRaw(self, args){
-		return chain(chain, this, {arguments:args})
+		return pipeline(chain, this, args)
 	}
 	SecondClassFunction.applyRaw = applyRaw
 
-	return secondFunction
+	return SecondClassFunction
 }
