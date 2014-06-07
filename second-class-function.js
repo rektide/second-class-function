@@ -1,9 +1,9 @@
-var pipeline2= require("./pipeline2")
+var pipeline= require("./pipeline")
 
 module.exports = makeSecondClassFunction
 
 function _results(ctx){
-	return ctx.results
+	return ctx.results || ctx.last
 }
 
 function _fail(ctx){
@@ -22,8 +22,8 @@ function makeSecondClassFunction() {
 	* @class
 	*/
 	function SecondClassFunction(){
-		var ctx = {arguments:arguments}
-		return pipeline(chain, this, ctx).then(_results, _fail)
+		var args= Array.prtotype.slice.call(arguments, 0)
+		return pipeline(this, chain, args).then(_results, _fail)
 	}
 	/**
 	* The underlying command chain
